@@ -5,7 +5,7 @@ import Menu from "./Menu"
 export default function Pagina(props) {
     return (
         <>
-            <Container>
+            <Container className="mb-3">
                 <Cabecalho titulo="Sistema de controle gerencial"></Cabecalho>
                 <Menu></Menu>
                 {

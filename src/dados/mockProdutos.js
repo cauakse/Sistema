@@ -1,0 +1,29 @@
+export const produtos=[
+    {
+        "codigo":1,
+        "descricao":"Camiseta",
+        "precoCusto":10.00,
+        "precoVenda":20.00,
+        "qtdEstoque":100,
+        "urlImagem":"",
+        "dataValidade":"31/12/2999"
+    },
+    {
+        "codigo":2,
+        "descricao":"Bermuda",
+        "precoCusto":15.00,
+        "precoVenda":25.00,
+        "qtdEstoque":75,
+        "urlImagem":"",
+        "dataValidade":"31/12/2999"
+    },
+    {
+        "codigo":3,
+        "descricao":"Chinelo",
+        "precoCusto":30.00,
+        "precoVenda":45.00,
+        "qtdEstoque":30,
+        "urlImagem":"",
+        "dataValidade":"31/12/2999"
+    }
+];

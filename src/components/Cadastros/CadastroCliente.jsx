@@ -68,7 +68,16 @@ export default function CadastroCliente(props) {
                             feedbackType="invalid"
                         />
                     </Form.Group>
-                    <Button type="submit">Enviar</Button>
+                    <Row>
+                        <Col md={1}>
+                         <Button type="submit">Enviar</Button>
+                        </Col>
+                        <Col md={1}>
+                        <Button type="" onClick={()=>{
+                            props.setExibirTabela(true);
+                        }}>Voltar</Button>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
 

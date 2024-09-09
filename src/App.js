@@ -1,37 +1,28 @@
-import Tela from "./components/Cadastros/Tela";
-import Tela404 from "./components/Cadastros/Tela404";
-import TelaMenu from "./components/Cadastros/TelaMenu"
-import CadastroProduto from "./components/Cadastros/CadastroProduto";
-import CadastroCategoria from "./components/Cadastros/CadastroCategoria";
-import CadastroCliente from "./components/Cadastros/CadastroCliente";
-import CadastroFornecedor from "./components/Cadastros/CadastroFornecedor";
+import Tela404 from "./components/Cadastros/Telas/Tela404";
+import TelaMenu from "./components/Cadastros/Telas/TelaMenu"
+import TelaProduto from "./components/Cadastros/Telas/TelaProduto"
+import TelaCategoria from "./components/Cadastros/Telas/TelaCategoria"
+import TelaFornecedor from "./components/Cadastros/Telas/TelaFornecedor"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import TelaCliente from "./components/Cadastros/Telas/TelaCliente";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/produto" element={
-            <Tela nome="Produto">
-              <CadastroProduto></CadastroProduto>
-            </Tela>
-          } />
+            <TelaProduto></TelaProduto>
+          }/>
 
           <Route path="/categoria" element={
-            <Tela nome="Categoria">
-              <CadastroCategoria></CadastroCategoria>
-            </Tela>
+            <TelaCategoria></TelaCategoria>
           } />
 
           <Route path="/cliente" element={
-            <Tela nome="Cliente">
-              <CadastroCliente></CadastroCliente>
-            </Tela>
+            <TelaCliente></TelaCliente>
           } />
           <Route path="/fornecedor" element={
-            <Tela nome="Fornecedor">
-              <CadastroFornecedor></CadastroFornecedor>
-            </Tela>
+            <TelaFornecedor></TelaFornecedor>
           } />
           <Route path="" element={
             <TelaMenu></TelaMenu>

@@ -16,7 +16,7 @@ export default function CadastroProduto(props) {
                                 required
                                 type="text"
                                 placeholder="Nome do produto"
-                                defaultValue="Mark"
+                                defaultValue=""
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -27,17 +27,10 @@ export default function CadastroProduto(props) {
                             <Form.Control
                                 required
                                 type="text"
-                                placeholder="Last name"
-                                defaultValue="Código"
+                                placeholder="Código"
+                                defaultValue=""
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="validationCustom03">
-                            <Form.Label>City</Form.Label>
-                            <Form.Control type="text" placeholder="City" required />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid city.
-                            </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">
@@ -54,21 +47,9 @@ export default function CadastroProduto(props) {
                             </InputGroup>
                         </Form.Group>
                         <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                            <Form.Label>Preço de Custo</Form.Label>
+                            <Form.Label>Preço de Venda</Form.Label>
                             <InputGroup hasValidation>
                                 <InputGroup.Text id="inputGroupPrepend">R$</InputGroup.Text>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Preço"
-                                    aria-describedby="inputGroupPrepend"
-                                    required
-                                />
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-                            <Form.Label>Preço de Custo</Form.Label>
-                            <InputGroup hasValidation>
-                                <InputGroup.Text id="inputGroupPrepend">+</InputGroup.Text>
                                 <Form.Control
                                     type="text"
                                     placeholder="Preço"
@@ -104,7 +85,17 @@ export default function CadastroProduto(props) {
                             feedbackType="invalid"
                         />
                     </Form.Group>
-                    <Button type="submit">Enviar</Button>
+                    <Row>
+                        <Col md={1}>
+                         <Button type="submit">Enviar</Button>
+                        </Col>
+                        <Col md={1}>
+                        <Button type="" onClick={()=>{
+                            props.setExibirTabela(true);
+                        }}>Voltar</Button>
+                        </Col>
+                    </Row>
+                    
                 </Form>
             </div>
 

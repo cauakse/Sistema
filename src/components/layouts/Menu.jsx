@@ -16,7 +16,7 @@ export default function Menu(props) {
                         <Nav className="me-auto">
                             <NavDropdown title="Cadastros" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#" as={Link} to="/cliente">Cliente</NavDropdown.Item>
-                                <NavDropdown.Item href="#" as={Link} to="/fornecedor">Fornecedo</NavDropdown.Item>
+                                <NavDropdown.Item href="#" as={Link} to="/fornecedor">Fornecedor</NavDropdown.Item>
                                 <NavDropdown.Item href="#" as={Link} to="/produto">Produto</NavDropdown.Item>
                                 <NavDropdown.Item href="#" as={Link} to="/categoria">Categoria</NavDropdown.Item>
                             </NavDropdown>

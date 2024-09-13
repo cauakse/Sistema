@@ -3,20 +3,57 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import { useState } from 'react';
 
 export default function CadastroProduto(props) {
+
+    const [produto,setProduto] = useState({
+        codigo:0,
+        descricao:"",
+        precoCusto:0.0,
+        precoVenda:0.0,
+        urlImagem:"",
+        dataValidade:""
+
+    });
+
+    function manipularMudanca(evento){
+        const elemento = evento.target.name;
+        const valor = evento.target.value;
+        setProduto({...produto,[elemento]:valor})
+    }
+
+    const [formValidado,setFormValidado] = useState(false);
+    function manipularSubmissao(evento){
+        const form = evento.currentTarget;
+        if(form.checkValidity()){
+            //cadastrar o produto
+            props.listaDeProdutos.push(produto);
+            props.setExibirTabela(true);
+        }
+        else
+        {
+            setFormValidado(true);
+        }
+        evento.preventDefault();
+        evento.stopPropagation();
+    }
+
     return (
         <>
             <div>
-                <Form>
+                <Form  noValidate validated={formValidado} onSubmit={manipularSubmissao}>
                     <Row className="mb-3">
                     <Form.Group as={Col} md="12" controlId="validationCustom01">
                             <Form.Label>Nome do produto</Form.Label>
                             <Form.Control
                                 required
                                 type="text"
+                                id="descricao"
+                                name="descricao"
                                 placeholder="Nome do produto"
-                                defaultValue=""
+                                value={produto.descricao}
+                                onChange={manipularMudanca}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -27,8 +64,12 @@ export default function CadastroProduto(props) {
                             <Form.Control
                                 required
                                 type="text"
+                                id="codigo"
+                                name="codigo"
                                 placeholder="Código"
                                 defaultValue=""
+                                value={produto.codigo}
+                                onChange={manipularMudanca}
                             />
                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                         </Form.Group>
@@ -41,6 +82,10 @@ export default function CadastroProduto(props) {
                                 <Form.Control
                                     type="text"
                                     placeholder="Preço"
+                                    onChange={manipularMudanca}    
+                                id="precoCusto"
+                                name="precoCusto"
+                                value={produto.precoCusto}
                                     aria-describedby="inputGroupPrepend"
                                     required
                                 />
@@ -53,6 +98,11 @@ export default function CadastroProduto(props) {
                                 <Form.Control
                                     type="text"
                                     placeholder="Preço"
+                                    
+                                id="precoVenda"
+                                name="precoVenda"
+                                onChange={manipularMudanca}
+                                value={produto.precoVenda}
                                     aria-describedby="inputGroupPrepend"
                                     required
                                 />
@@ -62,7 +112,14 @@ export default function CadastroProduto(props) {
                     <Row className="mb-3">
                     <Form.Group as={Col} md="12" controlId="validationCustom05">
                             <Form.Label>URL</Form.Label>
-                            <Form.Control type="text" placeholder="URL" required />
+                            <Form.Control 
+                            type="text" 
+                            value={produto.urlImagem}
+                            id="urlImagem"
+                            name="urlImagem"
+                            onChange={manipularMudanca}
+                            placeholder="URL" 
+                            required />
                             <Form.Control.Feedback type="invalid">
                                 Por favor informe a url da imagem.
                             </Form.Control.Feedback>
@@ -71,7 +128,14 @@ export default function CadastroProduto(props) {
                     <Row className="mb-3">
                     <Form.Group as={Col} md="4" controlId="validationCustom05">
                             <Form.Label>Válido até</Form.Label>
-                            <Form.Control type="date" placeholder="" required />
+                            <Form.Control 
+                            type="date"
+                            value={produto.dataValidade}
+                            id="dataValidade"
+                            name="dataValidade"
+                            onChange={manipularMudanca}
+                             placeholder="" 
+                             required />
                             <Form.Control.Feedback type="invalid">
                                 Por favor informe a data.
                             </Form.Control.Feedback>

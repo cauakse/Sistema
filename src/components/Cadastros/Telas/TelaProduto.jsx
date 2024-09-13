@@ -14,7 +14,7 @@ export default function TelaProduto(props) {
                     {
                         exibirTabela ? 
                         <TabelaProdutos setExibirTabela={setExibirTabela} listaDeProdutos={produtos}></TabelaProdutos>:
-                        <CadastroProduto setExibirTabela={setExibirTabela}></CadastroProduto>
+                        <CadastroProduto setExibirTabela={setExibirTabela} listaDeProdutos={produtos}></CadastroProduto>
                     }
                     
                 </Pagina>

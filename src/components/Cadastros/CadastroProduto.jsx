@@ -6,16 +6,25 @@ import Row from 'react-bootstrap/Row';
 import { useState } from 'react';
 
 export default function CadastroProduto(props) {
-
-    const [produto,setProduto] = useState({
-        codigo:0,
-        descricao:"",
-        precoCusto:0.0,
-        precoVenda:0.0,
-        urlImagem:"",
-        dataValidade:""
+    const [produto,setProduto] = useState(()=>{
+        if(props.modoEdicao){
+            props.setModoEdicao(false);
+            return props.produtoSelecionado;
+        }
+        else
+        {
+            return{
+                codigo:0,
+                descricao:"",
+                precoCusto:0.0,
+                precoVenda:0.0,
+                urlImagem:"",
+                dataValidade:""
+            }
+        }
 
     });
+
 
     function manipularMudanca(evento){
         const elemento = evento.target.name;
@@ -28,7 +37,20 @@ export default function CadastroProduto(props) {
         const form = evento.currentTarget;
         if(form.checkValidity()){
             //cadastrar o produto
-            props.listaDeProdutos.push(produto);
+            if(props.modoEdicao)
+            {
+                let array=props.listaDeProdutos.filter((item)=>{
+                    return item.codigo !== props.produtoSelecionado.codigo;
+                })
+                props.setListaDeProdutos([...array,produto])
+                props.setProdutoSelecionado({});
+                props.setModoEdicao(false);
+            }
+            else
+            {
+                props.setListaDeProdutos([...props.listaDeProdutos, produto]);
+            }
+
             props.setExibirTabela(true);
         }
         else

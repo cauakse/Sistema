@@ -5,7 +5,11 @@ import CadastroProduto from "../CadastroProduto";
 import TabelaProdutos from "../Tabelas/TabelaProdutos";
 import {produtos} from "../../../dados/mockProdutos.js"
 export default function TelaProduto(props) {
+    
     const [exibirTabela, setExibirTabela] = useState(true);
+    const [listaDeProdutos,setListaDeProdutos] = useState(produtos);
+    const [modoEdicao,setModoEdicao] = useState(false);
+    const [produtoSelecionado,setProdutoSelecionado] = useState({});
 
         return (
             <>
@@ -13,8 +17,23 @@ export default function TelaProduto(props) {
                     <Alert className={"text-center"} variant="primary">Tela de cadastro de Produto</Alert>
                     {
                         exibirTabela ? 
-                        <TabelaProdutos setExibirTabela={setExibirTabela} listaDeProdutos={produtos}></TabelaProdutos>:
-                        <CadastroProduto setExibirTabela={setExibirTabela} listaDeProdutos={produtos}></CadastroProduto>
+                        <TabelaProdutos 
+                        setExibirTabela={setExibirTabela} 
+                        listaDeProdutos={listaDeProdutos}
+                        setListaDeProdutos={setListaDeProdutos}
+                        setModoEdicao={setModoEdicao}
+                        setProdutoSelecionado={setProdutoSelecionado}
+                        ></TabelaProdutos>:
+
+                        <CadastroProduto 
+                        setExibirTabela={setExibirTabela} 
+                        listaDeProdutos={listaDeProdutos}
+                        setListaDeProdutos={setListaDeProdutos}
+                        setModoEdicao={setModoEdicao}
+                        modoEdicao={modoEdicao}
+                        produtoSelecionado={produtoSelecionado}
+                        setProdutoSelecionado={setProdutoSelecionado}
+                        ></CadastroProduto>
                     }
                     
                 </Pagina>

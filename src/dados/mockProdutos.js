@@ -5,8 +5,8 @@ export const produtos=[
         "precoCusto":10.00,
         "precoVenda":20.00,
         "qtdEstoque":100,
-        "urlImagem":"",
-        "dataValidade":"31/12/2999"
+        "urlImagem":"www.com/camisa",
+        "dataValidade":"2999/12/31"
     },
     {
         "codigo":2,
@@ -14,8 +14,8 @@ export const produtos=[
         "precoCusto":15.00,
         "precoVenda":25.00,
         "qtdEstoque":75,
-        "urlImagem":"",
-        "dataValidade":"31/12/2999"
+        "urlImagem":"www.com/bermuda",
+        "dataValidade":"2999/12/31"
     },
     {
         "codigo":3,
@@ -23,7 +23,7 @@ export const produtos=[
         "precoCusto":30.00,
         "precoVenda":45.00,
         "qtdEstoque":30,
-        "urlImagem":"",
-        "dataValidade":"31/12/2999"
+        "urlImagem":"www.com/chinelo",
+        "dataValidade":"2999/12/31"
     }
 ];

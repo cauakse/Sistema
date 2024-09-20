@@ -8,8 +8,7 @@ import { useState } from 'react';
 export default function CadastroProduto(props) {
     const [produto,setProduto] = useState(()=>{
         if(props.modoEdicao){
-            props.setModoEdicao(false);
-            return props.produtoSelecionado;
+            return {...props.produtoSelecionado};
         }
         else
         {
@@ -24,8 +23,6 @@ export default function CadastroProduto(props) {
         }
 
     });
-
-
     function manipularMudanca(evento){
         const elemento = evento.target.name;
         const valor = evento.target.value;
@@ -39,10 +36,10 @@ export default function CadastroProduto(props) {
             //cadastrar o produto
             if(props.modoEdicao)
             {
-                let array=props.listaDeProdutos.filter((item)=>{
-                    return item.codigo !== props.produtoSelecionado.codigo;
-                })
-                props.setListaDeProdutos([...array,produto])
+                props.setModoEdicao(false);
+                let array=props.listaDeProdutos;
+                array[array.findIndex(item => item.codigo === produto.codigo)]=produto;
+                props.setListaDeProdutos([...array])
                 props.setProdutoSelecionado({});
                 props.setModoEdicao(false);
             }
@@ -85,6 +82,7 @@ export default function CadastroProduto(props) {
                             <Form.Label>Código</Form.Label>
                             <Form.Control
                                 required
+                                disabled={props.modoEdicao}
                                 type="text"
                                 id="codigo"
                                 name="codigo"
@@ -173,10 +171,12 @@ export default function CadastroProduto(props) {
                     </Form.Group>
                     <Row>
                         <Col md={1}>
-                         <Button type="submit">Enviar</Button>
+                         <Button type="submit">{props.modoEdicao? "Alterar" : "Enviar"}</Button>
                         </Col>
                         <Col md={1}>
                         <Button type="" onClick={()=>{
+                            props.setProdutoSelecionado({});
+                            props.setModoEdicao(false);
                             props.setExibirTabela(true);
                         }}>Voltar</Button>
                         </Col>

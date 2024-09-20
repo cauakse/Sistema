@@ -15,7 +15,6 @@ export default function TabelaProdutos(props) {
         props.setProdutoSelecionado(produto);
         props.setExibirTabela(false);
     }
-
     return (
         <>
             <Container>

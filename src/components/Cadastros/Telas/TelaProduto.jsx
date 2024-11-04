@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagina from "../../layouts/Pagina"
 import { Alert } from "react-bootstrap";
 import CadastroProduto from "../CadastroProduto";
 import TabelaProdutos from "../Tabelas/TabelaProdutos";
-import {produtos} from "../../../dados/mockProdutos.js"
+//import {produtos} from "../../../dados/mockProdutos.js"
+import { consultarAllProduto } from "../../../services/serviceProduto";
 export default function TelaProduto(props) {
     
     const [exibirTabela, setExibirTabela] = useState(true);
-    const [listaDeProdutos,setListaDeProdutos] = useState(produtos);
+    const [listaDeProdutos,setListaDeProdutos] = useState([]);
     const [modoEdicao,setModoEdicao] = useState(false);
     const [produtoSelecionado,setProdutoSelecionado] = useState({});
+
+    useEffect(()=>{
+        consultarAllProduto().then((lista)=>{
+            setListaDeProdutos(lista);
+        })
+    },[])
 
         return (
             <>

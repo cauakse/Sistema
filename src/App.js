@@ -28,7 +28,7 @@ function App() {
           <Route path="/fornecedor" element={
             <TelaFornecedor></TelaFornecedor>
           } />
-          <Route path="" element={
+          <Route path="/Sistema" element={
             <TelaMenu></TelaMenu>
           } />
           <Route path="*" element={

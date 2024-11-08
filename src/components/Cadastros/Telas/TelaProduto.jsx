@@ -16,7 +16,8 @@ export default function TelaProduto(props) {
         consultarAllProduto().then((lista)=>{
             setListaDeProdutos(lista);
         })
-    },[])
+    },[exibirTabela])
+
 
         return (
             <>

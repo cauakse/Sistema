@@ -1,4 +1,5 @@
 const urlBase = 'https://bcclp-2-back-end.vercel.app/categoria';
+const urlCatInProd = 'https://bcclp-2-back-end.vercel.app/catInProd'
 
 export async function gravarCategoria(categoria){
     const resposta = await fetch(urlBase,{
@@ -14,7 +15,7 @@ export async function gravarCategoria(categoria){
 }
 
 export async function alterarCategoria(categoria) {
-    const resposta = await fetch(urlBase,{
+    const resposta = await fetch(urlBase+"/"+categoria.codigo,{
         'method':"PUT",
         'headers':{
             "Content-Type":"application/json"
@@ -44,4 +45,13 @@ export async function consultarAllCategoria() {
     const resultado = (await resposta).json();
     return resultado;
     
+}
+
+export async function consultaCategoriaInProdutos(){
+    const resposta = await fetch(urlCatInProd,{
+        'method':"GET"
+    });
+    
+    const resultado = (await resposta).json();
+    return resultado;
 }

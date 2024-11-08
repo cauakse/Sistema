@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import { useState, useEffect } from 'react';
 import { consultarAllCategoria } from '../../services/serviceCategoria.js';
 import toast, {Toaster} from 'react-hot-toast';
-import { gravarProduto} from '../../services/serviceProduto.js';
+import { alterarProduto, gravarProduto} from '../../services/serviceProduto.js';
 
 export default function CadastroProduto(props) {
     const [temCategorias, setTemCategorias] = useState(false);
@@ -15,12 +15,14 @@ export default function CadastroProduto(props) {
 
         if (props.modoEdicao) {
             return { ...props.produtoSelecionado };
+            
         } else {
             return {
                 codigo: 0,
                 descricao: "",
                 precoCusto: 0.0,
                 precoVenda: 0.0,
+                qtdEstoque: 0,
                 urlImagem: "",
                 dataValidade: "",
                 categoria: {}
@@ -64,9 +66,17 @@ export default function CadastroProduto(props) {
 
             // cadastrar o produto
             if (props.modoEdicao) {
-                let array = props.listaDeProdutos;
-                array[array.findIndex(item => item.codigo === produto.codigo)] = produto;
-                props.setListaDeProdutos([...array]);
+                
+                alterarProduto(produto).then((resultado)=>{
+                    if(resultado.status){
+                        props.setExibirTabela(true);
+                    }
+                    else
+                    {
+                        toast.error(resultado);
+                    }
+                })
+                
                 props.setProdutoSelecionado({});
                 props.setModoEdicao(false);
             } else {
@@ -113,7 +123,7 @@ export default function CadastroProduto(props) {
                         <Form.Control
                             required
                             disabled={props.modoEdicao}
-                            type="text"
+                            type="number"
                             id="codigo"
                             name="codigo"
                             placeholder="Código"
@@ -129,7 +139,7 @@ export default function CadastroProduto(props) {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="inputGroupPrepend">R$</InputGroup.Text>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 placeholder="Preço"
                                 onChange={manipularMudanca}
                                 id="precoCusto"
@@ -145,12 +155,28 @@ export default function CadastroProduto(props) {
                         <InputGroup hasValidation>
                             <InputGroup.Text id="inputGroupPrepend">R$</InputGroup.Text>
                             <Form.Control
-                                type="text"
+                                type="number"
                                 placeholder="Preço"
                                 id="precoVenda"
                                 name="precoVenda"
                                 onChange={manipularMudanca}
                                 value={produto.precoVenda}
+                                aria-describedby="inputGroupPrepend"
+                                required
+                            />
+                        </InputGroup>
+                    </Form.Group>
+                    <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+                        <Form.Label>Quantidade Estoque</Form.Label>
+                        <InputGroup hasValidation>
+                            <InputGroup.Text id="inputGroupPrepend">R$</InputGroup.Text>
+                            <Form.Control
+                                type="number"
+                                placeholder="Estoque"
+                                id="qtdEstoque"
+                                name="qtdEstoque"
+                                onChange={manipularMudanca}
+                                value={produto.qtdEstoque}
                                 aria-describedby="inputGroupPrepend"
                                 required
                             />
@@ -220,7 +246,10 @@ export default function CadastroProduto(props) {
                 </Form.Group>
                 <Row>
                     <Col md={1}>
-                        <Button disabled={!temCategorias} type="submit">{props.modoEdicao ? "Alterar" : "Enviar"}</Button>
+                        <Button 
+                        disabled={!temCategorias} 
+                        type="submit">{props.modoEdicao ? "Alterar" : "Enviar"}
+                        </Button>
                     </Col>
                     <Col md={1}>
                         <Button
@@ -236,7 +265,7 @@ export default function CadastroProduto(props) {
                     </Col>
                 </Row>
             </Form>
-            {!temCategorias ? <Toaster position='top-right'></Toaster> : ""};
+            {!temCategorias ? <Toaster position='top-right'></Toaster> : ""}
         </div>
     );
 }

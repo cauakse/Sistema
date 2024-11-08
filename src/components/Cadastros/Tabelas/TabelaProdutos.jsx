@@ -1,12 +1,20 @@
 import { Container, Button, Table } from "react-bootstrap";
-
+import {excluirProduto as exprod} from "../../../services/serviceProduto.js"
 export default function TabelaProdutos(props) {
 
     function excluirProduto(produto) {
         if (window.confirm("Deseja realmente excluir o produto " + produto.descricao + "?")) {
-            props.setListaDeProdutos(props.listaDeProdutos.filter((item) => {
-                return item.codigo !== produto.codigo;
-            }));
+            exprod(produto).then((resposta)=>{
+                if(resposta.status){
+                    props.setListaDeProdutos(props.listaDeProdutos.filter((item) => {
+                        return item.codigo !== produto.codigo;
+                    }));
+                }
+                else
+                {
+                    console.log(resposta);
+                }
+            })
         }
     }
 

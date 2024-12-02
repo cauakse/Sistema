@@ -1,6 +1,9 @@
 const urlBase = 'https://bcclp-2-back-end.vercel.app/categoria';
 const urlCatInProd = 'https://bcclp-2-back-end.vercel.app/catInProd'
 
+//const urlBase = 'http://localhost:4000/categoria';
+//const urlCatInProd = 'http://localhost:4000/catInProd';
+
 export async function gravarCategoria(categoria){
     const resposta = await fetch(urlBase,{
         'method':"POST",

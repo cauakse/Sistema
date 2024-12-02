@@ -36,6 +36,10 @@ export default function CadastroCategoria(props) {
             {
                 alterarCategoria(categoria).then((response)=>{
                     if(response.status){
+                        let array = props.listaDeCategorias.filter((item) => {
+                            return item.codigo !== categoria.codigo;
+                        });
+                        props.setListaDeCategorias(...array,categoria)
                         props.setExibirTabela(true);
                     }
                     else

@@ -25,7 +25,7 @@ export default function TelaCategoria(props) {
                         exibirTabela ? 
                         <TabelaCategorias 
                         setExibirTabela={setExibirTabela}
-                        listaDeCategorias={listaDeCategorias}
+                        listaDeCategorias={listaDeCategorias.length > 0 ? listaDeCategorias: []}
                         setListaDeCategorias={setListaDeCategorias}
                         modoEdicao={modoEdicao}
                         setModoEdicao={setModoEdicao}

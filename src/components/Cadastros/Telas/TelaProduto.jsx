@@ -27,16 +27,12 @@ export default function TelaProduto(props) {
                         exibirTabela ? 
                         <TabelaProdutos 
                         setExibirTabela={setExibirTabela} 
-                        listaDeProdutos={listaDeProdutos}
-                        setListaDeProdutos={setListaDeProdutos}
                         setModoEdicao={setModoEdicao}
                         setProdutoSelecionado={setProdutoSelecionado}
                         ></TabelaProdutos>:
 
                         <CadastroProduto 
                         setExibirTabela={setExibirTabela} 
-                        listaDeProdutos={listaDeProdutos}
-                        setListaDeProdutos={setListaDeProdutos}
                         setModoEdicao={setModoEdicao}
                         modoEdicao={modoEdicao}
                         produtoSelecionado={produtoSelecionado}

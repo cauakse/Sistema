@@ -3,9 +3,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { contextoUsuario } from "../../App.js";
 
 export default function Menu(props) {
-
+    const {usuario,setUsuario}=useContext(contextoUsuario)
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary mt-2 mb-3">
@@ -34,7 +36,13 @@ export default function Menu(props) {
                                 <NavDropdown.Item href="#action/3.4">Compras</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link href='#home'>Sobre</Nav.Link>
-                            <Nav.Link href='#home'>Sair</Nav.Link>
+                            <Nav.Link  onClick={()=>{
+                            setUsuario({
+                                "usuario":"",
+                                "logado":false
+                            })
+                        }}>Sair</Nav.Link>
+                        <Nav.Link>Usuario logado: {usuario.usuario}</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

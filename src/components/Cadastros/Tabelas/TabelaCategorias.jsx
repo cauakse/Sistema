@@ -1,12 +1,30 @@
 import { Container, Button, Table } from "react-bootstrap";
-
+import { excluirCategoria as exCat,consultaCategoriaInProdutos} from "../../../services/serviceCategoria";
 export default function TabelaCategorias(props) {
 
     function excluirCategoria(categoria) {
         if (window.confirm("Deseja realmente excluir a categoria " + categoria.nome + "?")) {
-            props.setListaDeCategorias(props.listaDeCategorias.filter((item) => {
-                return item.nome !== categoria.nome;
-            }));
+
+            consultaCategoriaInProdutos().then((lista)=>{
+                for(var i =0 ; i< lista.length&&lista[i].codigo!=categoria.codigo; i++);
+                
+                if(i<lista.length){
+                    window.alert("Categoria nao pode ser excluida pois ja existe um produto associado a ela");
+                }
+                else
+                {
+                    exCat(categoria).then((resposta)=>{
+                        if(resposta.status){
+                            props.setListaDeCategorias(props.listaDeCategorias.filter((item) => {
+                                return item.codigo !== categoria.codigo;
+                            }));
+                        }
+                        else{
+                            console.log(resposta);
+                        }
+                    })
+                }
+            })
         }
     }
 
@@ -24,7 +42,7 @@ export default function TabelaCategorias(props) {
                 }}>Adicionar</Button>
                 <Table striped bordered hover>
                     <thead>
-                        <th>Nome</th>
+                        <th>Código</th>
                         <th>Descrição</th>
                         <th>Ações</th>
                     </thead>
@@ -33,7 +51,7 @@ export default function TabelaCategorias(props) {
                             props.listaDeCategorias?.map((categoria) => {
                                 return (
                                     <tr>
-                                        <td>{categoria.nome}</td>
+                                        <td>{categoria.codigo}</td>
                                         <td>{categoria.descricao}</td>
                                         <td className="d-flex align-itens-center justify-content-center gap-3">
                                             <Button variant="warning" onClick={() => { alterarCategoria(categoria) }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
